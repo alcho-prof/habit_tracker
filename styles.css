@@ -1,0 +1,361 @@
+:root {
+    --bg-app: #ffffff;
+    --bg-panel: #f9fafb;
+    /* Light grey for sidebar */
+    --bg-panel-transparent: rgba(255, 255, 255, 1);
+    --primary: #000000;
+    --primary-glow: rgba(0, 0, 0, 0.1);
+    --secondary: #4b5563;
+    --accent-green: #000000;
+    /* Keeping it mono for now, or very dark grey */
+    --accent-blue: #3b82f6;
+    --text-main: #111827;
+    --text-muted: #6b7280;
+    --border: #d1d5db;
+    /* Distinct grey border */
+    --card-radius: 0px;
+    /* Sharp corners for Excel feel */
+    --font-heading: 'Inter', sans-serif;
+    /* Professional font */
+    --font-body: 'Inter', sans-serif;
+    --gradient-primary: linear-gradient(135deg, #000000, #374151);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    height: 100vh;
+    overflow: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+#root {
+    height: 100%;
+}
+
+.app-container {
+    display: flex;
+    height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.nav-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    /* Tighter spacing */
+}
+
+.nav-item {
+    padding: 0.75rem 1rem;
+    border-radius: 4px;
+    /* Slight roundness or 0 */
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.1s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: var(--text-muted);
+    border: 1px solid transparent;
+}
+
+.nav-item:hover {
+    background: #e5e7eb;
+    color: var(--text-main);
+}
+
+.nav-item.active {
+    background: #ffffff;
+    color: var(--primary);
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Main Content */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    background: #ffffff;
+    /* Grid Pattern for that Excel look */
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: -1px -1px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    background: white;
+    padding: 1.5rem;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.title-section h1 {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.title-section p {
+    color: var(--text-muted);
+}
+
+/* Dashboard Grid */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Cards */
+.card {
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: var(--card-radius);
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.card:hover {
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    border-color: var(--text-muted);
+}
+
+.card-title {
+    font-size: 0.85rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--text-main);
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+/* Progress Rings (Image 3) */
+.progress-ring-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 150px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.ring-bg {
+    fill: none;
+    stroke: #e5e7eb;
+    stroke-width: 8;
+}
+
+.ring-progress {
+    fill: none;
+    stroke: var(--primary);
+    stroke-width: 8;
+    stroke-linecap: square;
+    /* Sharp edges */
+    transform: rotate(-90deg);
+    transform-origin: 50% 50%;
+    transition: stroke-dashoffset 0.5s ease;
+}
+
+.ring-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 1.5rem;
+    font-weight: 700;
+    font-family: var(--font-heading);
+}
+
+/* Habit Spreadsheet (Image 1/2) */
+.habit-matrix {
+    width: 100%;
+    border-collapse: collapse;
+    /* Excel style collapse */
+}
+
+.habit-matrix th {
+    padding: 0.75rem;
+    color: var(--text-main);
+    font-weight: 600;
+    border: 1px solid var(--border);
+    text-align: center;
+    background: #f3f4f6;
+    /* Header background */
+    font-size: 0.85rem;
+}
+
+.habit-matrix th.habit-name-col {
+    text-align: left;
+    min-width: 200px;
+    padding-left: 1rem;
+}
+
+.habit-matrix td {
+    padding: 0.5rem;
+    border: 1px solid var(--border);
+    text-align: center;
+    background: white;
+}
+
+.habit-row:hover td {
+    background: #f9fafb;
+}
+
+/* Custom Checkbox */
+.check-box {
+    width: 20px;
+    height: 20px;
+    border: 1px solid var(--text-muted);
+    border-radius: 0;
+    /* Square */
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.1s;
+    background: white;
+}
+
+.check-box.checked {
+    background: var(--primary);
+    border-color: var(--primary);
+    box-shadow: none;
+}
+
+.check-box svg {
+    width: 14px;
+    height: 14px;
+    color: white;
+    stroke-width: 3;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: opacity 0.1s;
+}
+
+.check-box.checked svg {
+    opacity: 1;
+    transform: scale(1);
+}
+
+/* Analysis Bars (Image 0) */
+.analysis-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    gap: 1rem;
+}
+
+.bar-bg {
+    flex: 1;
+    height: 20px;
+    /* Thicker bars */
+    background: #f3f4f6;
+    border: 1px solid var(--border);
+    border-radius: 0;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    border-radius: 0;
+    background: var(--text-main);
+    /* Black fill */
+}
+
+/* Tasks Column */
+.task-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.task-item:last-child {
+    border-bottom: none;
+}
+
+.task-item.done {
+    text-decoration: line-through;
+    color: var(--text-muted);
+}
+
+/* Animations */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 0 0px var(--primary-glow);
+    }
+
+    100% {
+        box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted);
+}
