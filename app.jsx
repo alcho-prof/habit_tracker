@@ -155,7 +155,11 @@ const HabitTrackerView = ({ habits, checkData, toggleCheck, monthDays, addNewHab
                             <tr key={habit.id} className="habit-row">
                                 <td style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', color: "var(--text-main)", fontWeight: 500 }}>
                                     <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                                        <span style={{ opacity: 0.5 }}>•</span>
+                                        {habit.icon && habit.icon.startsWith('bi-') ? (
+                                            <i className={`bi ${habit.icon}`} style={{ color: habit.color || 'var(--text-main)' }}></i>
+                                        ) : (
+                                            <span>{habit.icon || "•"}</span>
+                                        )}
                                         {habit.name}
                                     </div>
                                     <button
@@ -163,7 +167,7 @@ const HabitTrackerView = ({ habits, checkData, toggleCheck, monthDays, addNewHab
                                         style={{ background: 'none', border: 'none', color: '#ef4444', cursor: 'pointer', opacity: 0.3, fontSize: '0.8rem' }}
                                         title="Delete Habit"
                                     >
-                                        ✕
+                                        <i className="bi bi-x-lg"></i>
                                     </button>
                                 </td>
                                 {monthDays.map(d => (
@@ -398,7 +402,11 @@ const App = () => {
     const addNewHabit = async (name) => {
         if (!name.trim()) return;
         try {
-            const newHabit = await API.addHabit(name);
+            // Default icon is now a bootstrap class
+            const newHabit = await API.addHabit(name); // API might set default icon on server? 
+            // Wait, server.py sets "📝". I should update server.py too or handle it here.
+            // Let's rely on server for now but the server sends emoji. The frontend should handle it? 
+            // Better to just treat the 'icon' field as a class name if it starts with 'bi-', else render as text.
             setHabits(prev => [...prev, newHabit]);
         } catch (err) {
             console.error("Failed to add habit", err);
@@ -483,7 +491,7 @@ const App = () => {
             {/* Sidebar */}
             <div className="sidebar">
                 <div className="logo">
-                    <span>⚡</span> LEVEL UP
+                    <i className="bi bi-lightning-charge-fill" style={{ color: 'var(--primary)' }}></i> LEVEL UP
                 </div>
 
                 {/* Gamification Profile */}
@@ -505,19 +513,19 @@ const App = () => {
                         className={`nav-item ${view === 'dashboard' ? 'active' : ''}`}
                         onClick={() => setView('dashboard')}
                     >
-                        <span>📊</span> Dashboard
+                        <i className="bi bi-bar-chart-fill"></i> Dashboard
                     </div>
                     <div
                         className={`nav-item ${view === 'tracker' ? 'active' : ''}`}
                         onClick={() => setView('tracker')}
                     >
-                        <span>📅</span> Monthly Tracker
+                        <i className="bi bi-calendar3"></i> Monthly Tracker
                     </div>
                     <div
                         className={`nav-item ${view === 'settings' ? 'active' : ''}`}
                         onClick={() => setView('settings')}
                     >
-                        <span>⚙️</span> Settings
+                        <i className="bi bi-gear-fill"></i> Settings
                     </div>
                 </div>
 
@@ -577,21 +585,21 @@ const App = () => {
                     className={`nav-item ${view === 'dashboard' ? 'active' : ''}`}
                     onClick={() => setView('dashboard')}
                 >
-                    <div style={{ fontSize: '1.2rem' }}>📊</div>
+                    <i className="bi bi-bar-chart-fill" style={{ fontSize: '1.2rem' }}></i>
                     <span style={{ fontSize: '0.7rem' }}>Dashboard</span>
                 </div>
                 <div
                     className={`nav-item ${view === 'tracker' ? 'active' : ''}`}
                     onClick={() => setView('tracker')}
                 >
-                    <div style={{ fontSize: '1.2rem' }}>📅</div>
+                    <i className="bi bi-calendar3" style={{ fontSize: '1.2rem' }}></i>
                     <span style={{ fontSize: '0.7rem' }}>Tracker</span>
                 </div>
                 <div
                     className={`nav-item ${view === 'settings' ? 'active' : ''}`}
                     onClick={() => setView('settings')}
                 >
-                    <div style={{ fontSize: '1.2rem' }}>⚙️</div>
+                    <i className="bi bi-gear-fill" style={{ fontSize: '1.2rem' }}></i>
                     <span style={{ fontSize: '0.7rem' }}>Settings</span>
                 </div>
             </div>

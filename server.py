@@ -21,16 +21,16 @@ def init_db():
         c.execute('SELECT count(*) FROM habits')
         if c.fetchone()[0] == 0:
             initial_habits = [
-                (1, "5:30 AM Wake Up", "⏰", "#f87171"),
-                (2, "Stop smoking green", "🌿", "#4ade80"),
-                (3, "No Porn", "💦", "#60a5fa"),
-                (4, "Budget Tracking", "💰", "#fbbf24"),
-                (5, "No Alcohol", "🍾", "#a855f7"),
-                (6, "No social media", "❌", "#f43f5e"),
-                (7, "Project Work", "🎯", "#2563eb"),
-                (8, "Read 10 Pages", "📚", "#f59e0b"),
-                (9, "Cold Shower", "🚿", "#06b6d4"),
-                (10, "Work Session", "💻", "#8b5cf6")
+                (1, "5:30 AM Wake Up", "bi-alarm", "#f87171"),
+                (2, "Stop smoking green", "bi-flower1", "#4ade80"),
+                (3, "No Porn", "bi-droplet", "#60a5fa"),
+                (4, "Budget Tracking", "bi-piggy-bank", "#fbbf24"),
+                (5, "No Alcohol", "bi-cup-straw", "#a855f7"),
+                (6, "No social media", "bi-phone-vibrate", "#f43f5e"),
+                (7, "Project Work", "bi-bullseye", "#2563eb"),
+                (8, "Read 10 Pages", "bi-book", "#f59e0b"),
+                (9, "Cold Shower", "bi-snow", "#06b6d4"),
+                (10, "Work Session", "bi-laptop", "#8b5cf6")
             ]
             c.executemany('INSERT INTO habits VALUES (?,?,?,?)', initial_habits)
             conn.commit()
@@ -71,7 +71,7 @@ def add_habit():
     # We will let sqlite autoincrement but we defined id safely? 
     # Actually let's just insert
     cursor = conn.execute('INSERT INTO habits (name, icon, color) VALUES (?, ?, ?)', 
-                          (name, "📝", "#000000"))
+                          (name, "bi-pencil-square", "#000000"))
     new_id = cursor.lastrowid
     conn.commit()
     
