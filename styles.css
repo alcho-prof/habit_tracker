@@ -359,3 +359,109 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: var(--text-muted);
 }
+
+/* Mobile Optimization */
+.bottom-nav {
+    display: none;
+    /* Hidden on desktop */
+}
+
+@media (max-width: 768px) {
+    .app-container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        display: none;
+        /* Hide sidebar on mobile */
+    }
+
+    .main-content {
+        padding: 1rem;
+        padding-bottom: 90px;
+        /* Space for bottom nav */
+    }
+
+    .bottom-nav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: white;
+        border-top: 1px solid var(--border);
+        padding: 0.5rem;
+        justify-content: space-around;
+        z-index: 100;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    .bottom-nav .nav-item {
+        flex-direction: column;
+        gap: 2px;
+        padding: 0.5rem;
+        border: none;
+        background: transparent !important;
+        /* Override hover/active bg */
+        box-shadow: none !important;
+        align-items: center;
+        flex: 1;
+        justify-content: center;
+    }
+
+    .bottom-nav .nav-item.active {
+        color: var(--primary);
+        font-weight: 700;
+        border: none;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+        /* Stack cards */
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        padding: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .header .title-section {
+        width: 100%;
+    }
+
+    .header h1 {
+        font-size: 1.5rem;
+    }
+
+    .header .card {
+        width: 100%;
+        justify-content: center;
+        margin-top: 0.5rem;
+        padding: 0.5rem;
+    }
+
+    .analysis-row {
+        gap: 0.5rem;
+    }
+
+    /* Ensure tables can scroll */
+    .card {
+        padding: 1rem;
+        overflow-x: auto;
+    }
+
+    .habit-matrix th,
+    .habit-matrix td {
+        padding: 0.5rem 0.25rem;
+        font-size: 0.8rem;
+    }
+
+    /* Adjust habit name col width */
+    .habit-matrix th.habit-name-col {
+        min-width: 140px;
+        padding-left: 0.5rem;
+    }
+}

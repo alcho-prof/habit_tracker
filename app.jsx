@@ -570,6 +570,31 @@ const App = () => {
                     <SettingsView />
                 )}
             </div>
+
+            {/* Mobile Bottom Navigation */}
+            <div className="bottom-nav">
+                <div
+                    className={`nav-item ${view === 'dashboard' ? 'active' : ''}`}
+                    onClick={() => setView('dashboard')}
+                >
+                    <div style={{ fontSize: '1.2rem' }}>📊</div>
+                    <span style={{ fontSize: '0.7rem' }}>Dashboard</span>
+                </div>
+                <div
+                    className={`nav-item ${view === 'tracker' ? 'active' : ''}`}
+                    onClick={() => setView('tracker')}
+                >
+                    <div style={{ fontSize: '1.2rem' }}>📅</div>
+                    <span style={{ fontSize: '0.7rem' }}>Tracker</span>
+                </div>
+                <div
+                    className={`nav-item ${view === 'settings' ? 'active' : ''}`}
+                    onClick={() => setView('settings')}
+                >
+                    <div style={{ fontSize: '1.2rem' }}>⚙️</div>
+                    <span style={{ fontSize: '0.7rem' }}>Settings</span>
+                </div>
+            </div>
         </div>
     );
 };
